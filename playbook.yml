@@ -1,0 +1,24 @@
+---
+- hosts: all
+  become: root
+  remote_user: root
+  tasks:
+    - name: to add a group
+      group:
+        name: normal
+        state: present
+    - name: to create a file in the managed hosts
+      file:
+        state: touch
+        path: /home/brad/bradfile
+        owner: brad
+        group: brad
+        mode: 0600
+    - name: to create an user
+      user:
+        name: santosh
+        shell: /bin/sh
+        comment: smart_guy
+        groups: normal
+        append: yes
+
